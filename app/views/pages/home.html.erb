@@ -1,0 +1,17 @@
+<div id="app">
+	<div class="col-md-4" v-for="person in people">
+		<div v-on:click="toggleBio(person)">{{ person["name"] }}<br /><br /></div>
+		<div v-if="person['bioVisible']" >Bio: {{ person["bio"] }}<br /><br /></div>
+		<div v-on:click="deletePerson(person)">Delete this person<br /><br /></div>
+	</div>
+
+	<br /><br /><br />
+
+	<div class="col-md-12">
+		<input type="text" v-model="newPersonName" placeholder="Name">
+		<input type="text" v-model="newPersonBio" placeholder="Bio">
+		<button v-on:click="addPerson()">Add Person</button><br /><br />
+		<div>Number of people: {{people.length}}</div>
+	</div>
+
+</div>
