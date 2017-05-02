@@ -1,8 +1,13 @@
 <div id="app">
-	<div class="col-md-4" v-for="person in people">
+
+	Search for a person: <input v-model="nameFilter"></input><br/><br/>
+
+
+	<div class="col-md-4" v-for="person in people" v-if="isValidPerson(person)">
 		<div v-on:click="toggleBio(person)">{{ person["name"] }}<br /><br /></div>
+		<div>{{ person["id"] }}<br /><br /></div>
 		<div v-if="person['bioVisible']" >Bio: {{ person["bio"] }}<br /><br /></div>
-		<div v-on:click="deletePerson(person)">Delete this person<br /><br /></div>
+		<button v-on:click="deletePerson(person)">Delete this person</button>
 	</div>
 
 	<br /><br /><br />
@@ -11,6 +16,15 @@
 		<input type="text" v-model="newPersonName" placeholder="Name">
 		<input type="text" v-model="newPersonBio" placeholder="Bio">
 		<button v-on:click="addPerson()">Add Person</button><br /><br />
+
+		<div>
+			<ul>
+				<li v-for="error in errors">
+					{{ error }}
+				</li>
+			</ul>
+		</div>
+
 		<div>Number of people: {{people.length}}</div>
 	</div>
 
