@@ -3,12 +3,14 @@
 	Search for a person: <input v-model="nameFilter"></input><br/><br/>
 
 
-	<div class="col-md-4" v-for="person in people" v-if="isValidPerson(person)">
-		<div v-on:click="toggleBio(person)">{{ person["name"] }}<br /><br /></div>
-		<div>{{ person["id"] }}<br /><br /></div>
-		<div v-if="person['bioVisible']" >Bio: {{ person["bio"] }}<br /><br /></div>
-		<button v-on:click="deletePerson(person)">Delete this person</button>
-	</div>
+	<transition-group name="fade">
+		<div class="col-md-4" v-for="person in people" v-if="isValidPerson(person)" v-bind:key="person.id">
+			<div v-on:click="toggleBio(person)">{{ person["name"] }}<br /><br /></div>
+			<div>{{ person["id"] }}<br /><br /></div>
+			<div v-if="person['bioVisible']" >Bio: {{ person["bio"] }}<br /><br /></div>
+			<button v-on:click="deletePerson(person)">Delete this person</button>
+		</div>
+	</transition-group>
 
 	<br /><br /><br />
 
